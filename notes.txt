@@ -1,0 +1,120 @@
+app.use(helmet()); // add some headers in res for more security
+helmet package => read more if u need
+
+
+compression package => for compress assets files like css and js files in the fly you will do not do that manually as most of hosting providers do this for you 
+images not included as it will takes more time 
+
+
+
+
+morgan
+
+you also do not have to do this hosting provider will do this for you
+More on Logging
+Besides using morgan to log requests in general, you can also add your own log messages in your code.
+
+For one, you can of course use the good old console.log() command to write logs.
+
+For a more advanced/ detailed approach on logging (with higher control), see this article: https://blog.risingstack.com/node-js-logging-tutorial/
+
+
+
+
+
+Key Benefits of Using morgan in Express.js:
+Request Logging:
+
+morgan logs details about incoming HTTP requests, such as the request method (GET, POST, etc.), the requested URL, the status code of the response, and the response time. This information is invaluable for monitoring the behavior of your application.
+Debugging and Troubleshooting:
+
+By logging HTTP requests, morgan helps developers identify and debug issues in their application. For example, if users are encountering errors, the logs can show what requests were made and what responses were returned, helping to pinpoint the problem.
+Traffic Monitoring:
+
+morgan provides a simple way to monitor the traffic to your application. By analyzing the logs, you can understand which routes are most frequently accessed, how the server is performing under load, and if there are any patterns in the requests (e.g., spikes in traffic).
+Performance Analysis:
+
+morgan can log the time it takes to process each request, allowing you to measure the performance of your application. If certain requests are taking longer than expected, you can investigate and optimize those parts of your application.
+Customization:
+
+morgan allows you to customize the format of the logs to suit your needs. You can choose from predefined formats (like combined, common, dev, short, etc.) or create your own custom format to log exactly what you need.
+Integration with Logging Systems:
+
+morgan can be configured to write logs to a file or send logs to external logging services like Loggly, Papertrail, or any other logging service. This is useful for persistent logging, especially in production environments.
+Middleware Integration:
+
+As an Express.js middleware, morgan is easy to integrate into your application. You simply include it in your middleware stack, and it starts logging requests immediately.
+
+
+
+
+
+
+
+
+
+
+
+AWS S3
+
+Here's one important note about hosting our app on Heroku!
+
+The user-generated/ uploaded images, are saved and served as intended. But like all hosting providers that offer virtual servers, your file storage is not persistent!
+
+Your source code is saved and re-deployed when you shut down the server (or when it goes to sleep, as it does automatically after some time in the Heroku free tier).
+
+But your generated and uploaded files are not stored and re-created. They would be lost after a server restart!
+
+Therefore, it's recommended that you use a different storage place when using such a hosting provider.
+
+In cases where you run your own server, which you fully own/ manage, that does of course not apply.
+
+What would be alternatives?
+
+A popular and very efficient + affordable alternative is AWS S3 (Simple Storage Service): https://aws.amazon.com/s3/
+
+You can easily configure multer to store your files there with the help of another package: https://www.npmjs.com/package/multer-s3
+
+To also serve your files, you can use packages like s3-proxy: https://www.npmjs.com/package/s3-proxy
+
+For deleting the files (or interacting with them on your own in general), you'd use the AWS SDK: https://aws.amazon.com/sdk-for-node-js/
+
+
+
+
+
+
+
+ssl/tll
+
+openssl req -nodes -new -x509 -keyout server.key -out server.cert
+for create public and private key
+also you will do it 
+public key enter in create cetifact ssl
+prowser encript by using certifact ssl through pbulic key
+
+
+
+
+
+
+
+
+Useful Resources & Links
+Attached, you find the source code for this section.
+
+When using my source code, make sure to run npm install in the extracted folder!
+
+Useful resources:
+
+Herokus Docs: https://devcenter.heroku.com/categories/reference
+
+Deploying SPAs (like our React App): https://medium.com/@baphemot/understanding-react-deployment-5a717d4378fd
+
+Alternative Hosting Providers:
+
+Amazon Web Services: https://aws.amazon.com/getting-started/projects/deploy-nodejs-web-app/
+
+DigitalOcean: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
+
+And of course everything Google yields on "nodejs hosting"
